@@ -2,12 +2,12 @@
   <div>
     <header id="header">
       <div class="mainHeader">
-        <el-col :span="4" class="logo"><a href="#/">上善若水</a></el-col>
+        <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
         <el-col :span="11">
           <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1">处理中心</el-menu-item>
-            <el-menu-item index="2">第二个按钮</el-menu-item>
-            <el-menu-item index="3">订单管理</el-menu-item>
+            <el-menu-item index="1">我的技术</el-menu-item>
+            <el-menu-item index="2">我的问题</el-menu-item>
+            <el-menu-item index="3">我的收藏</el-menu-item>
           </el-menu>
         </el-col>
         <el-col :span="6" style="padding:11px 0">
