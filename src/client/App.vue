@@ -5,7 +5,13 @@
         <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
         <el-col :span="11">
           <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1">我的技术</el-menu-item>
+            <el-submenu index="1">
+              <template slot="title">我的技术</template>
+              <el-menu-item index="1-1">ES6</el-menu-item>
+              <el-menu-item index="1-2">Nodejs</el-menu-item>
+              <el-menu-item index="1-3">Vuejs</el-menu-item>
+              <el-menu-item index="1-4">Reactjs</el-menu-item>
+            </el-submenu>
             <el-menu-item index="2">我的问题</el-menu-item>
             <el-menu-item index="3">我的收藏</el-menu-item>
           </el-menu>
@@ -28,7 +34,7 @@
   name:'app',
   data(){
       return {
-          activeIndex:null,
+          activeIndex:'',
           input2:""
       }
   },
@@ -77,7 +83,6 @@ a:hover{text-decoration:none;}/*鼠标悬停时*/
 #header .mainHeader{
   width:1000px;
   margin:0 auto;
-  overflow:hidden;
 }
 #header .logo{
   height:60px;

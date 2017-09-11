@@ -1,8 +1,8 @@
 <template>
 	<div id="loginBox">
 		<el-form :model="loginBoxForm" :rules="loginRule" ref="loginBoxForm" label-width="100px" class="loginBoxMain">
-			<el-form-item label="手机" prop="phone">
-				<el-input v-model="loginBoxForm.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
+			<el-form-item label="手机" prop="username">
+				<el-input v-model="loginBoxForm.username" auto-complete="off" placeholder="请输入手机号码"></el-input>
 			</el-form-item>
 			<el-form-item label="密码" prop="password">
 				<el-input type="password" v-model="loginBoxForm.password" auto-complete="off" placeholder="请输入6-12位密码"></el-input>
@@ -15,9 +15,11 @@
 	</div>
 </template>
 <script>
+import {mapActions} from 'vuex'
+import axios from 'axios'
 export default {
   data() {
-    var validatePhone = (rule,value,callback)=>{
+    var validateUsername = (rule,value,callback)=>{
       if(value === ''){
         return callback(new Error('手机号不能为空'));
       }
@@ -37,12 +39,12 @@ export default {
     }
     return {
       loginBoxForm: {
-        phone: '',
+        username: '',
         password: ''
       },
       loginRule: {
-        phone: [
-          { validator: validatePhone, trigger: 'blur' }
+        username: [
+          { validator: validateUsername, trigger: 'blur' }
         ],
         password: [
           { validator: validatePassword, trigger: 'blur' }
@@ -51,10 +53,19 @@ export default {
     };
   },
   methods: {
+    ...mapActions([
+      'login'
+    ]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('LOGIN!');
+          axios.post('/api/user/login',{
+            username:'212121212',
+            password:'12121221212'
+          }).then()
+          .catch(err=>{
+            console.log(err);
+          })
         } else {
           console.log('error LOGIN!!');
           return false;

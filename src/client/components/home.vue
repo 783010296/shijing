@@ -1,8 +1,9 @@
 <template>
 	<div class="block">
 		<el-carousel trigger="click" height="400px">
-			<el-carousel-item v-for="color in colors" :key="color" :style='{background:color}'>
+			<el-carousel-item v-for="(color,index) in colors" :key="color" :style='{background:color}'>
 				<h3>{{ color }}</h3>
+				<h3>{{ index }}</h3>
 			</el-carousel-item>
 		</el-carousel>
 	</div>
@@ -22,7 +23,7 @@ export default {
 <style>
 .block h3{
 	text-align:center;
-	margin:150px;
+	margin:50px;
 	font-size:90px;
 }
 .el-carousel__arrow{
@@ -35,5 +36,8 @@ export default {
 }
 .el-carousel__arrow--right{
 	right:120px;
+}
+.el-carousel__button{
+	width:50px;
 }
 </style>
