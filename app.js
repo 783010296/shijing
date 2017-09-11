@@ -42,9 +42,14 @@ const app = express()
 
 const port = process.env.PORT || 8090
 
-mongoose.connect(settings.url)
+mongoose.connect(settings.url,{useMongoClient: true})
 mongoose.Promise = global.Promise
-
+mongoose.connection.on('connected', function () {    
+    console.log('Mongoose connection success');  
+});
+mongoose.connection.on('error',function (err) {    
+    console.log('Mongoose connection error: ' + err);  
+}); 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('src/dist'))

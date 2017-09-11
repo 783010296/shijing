@@ -40,7 +40,7 @@ router.post('/reg',(req,res)=>{
 })
 
 router.post('/login',(req,res)=>{
-	/*User.findOne({},(err,user)=>{
+	User.findOne({},(err,user)=>{
 		if(err){
 			return res.json({key:'0',err:err})
 		}
@@ -54,20 +54,11 @@ router.post('/login',(req,res)=>{
 		}
 		res.json({key:'1',user:user})
 		return res.redirect('/')
-	})*/
-	User.findOne({username:req.body.username}).then(user=>{
-		console.log('12')
-		console.log(user);
-	}).catch(err=>{
-		console.log('122')
-		console.log(err)
 	})
 })
 
 router.get('/get',(req,res)=>{
 	res.json({'lalal':'hahah'})
 })
-
-
 
 export default router
