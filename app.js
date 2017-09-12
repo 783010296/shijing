@@ -40,8 +40,6 @@ import user from './src/server/routes/user'
 import bodyParser from 'body-parser'
 const app = express()
 
-const port = process.env.PORT || 8090
-
 mongoose.connect(settings.url,{useMongoClient: true})
 mongoose.Promise = global.Promise
 mongoose.connection.on('connected', function () {    
@@ -50,6 +48,8 @@ mongoose.connection.on('connected', function () {
 mongoose.connection.on('error',function (err) {    
     console.log('Mongoose connection error: ' + err);  
 }); 
+
+const port = process.env.PORT || 8090
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('src/dist'))

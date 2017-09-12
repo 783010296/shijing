@@ -1,4 +1,4 @@
-# scutks
+# 拾景
 
 > A Vue.js project
 
@@ -22,4 +22,5 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## 开发日记
 
-2017-9-11 连接mongoose,connect要加参数，最好判断下数据库是不是连接成功了，加上数据库认证
+- 2017-9-11 连接mongoose,connect要加参数，最好判断下数据库是不是连接成功了，加上数据库认证
+- 2017-9-12 mongoDB createUser 加角色，不要空，否则会报没有权限

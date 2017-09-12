@@ -1,7 +1,8 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
 
 import User from '../models/user'
+import crypto from 'crypto'
 
 const secretKey = 'fd*^$#ygwefugb!#TYTf%&lasgdfiu&*%^'; 
 
@@ -10,27 +11,20 @@ router.post('/reg',(req,res)=>{
 		if(err){
 			return res.josn({key:'0',err:err})
 		}
-		if(user){
+		if(user.length !== 0){
 			return res.json({key:'0',err:'用户已存在'})
 		}
-		let date = new Date()
-		let time = {
-			date:date,
-			year:date.getFullYear(),
-			month:date.getFullYear() + "-" + (date.getMonth()+1),
-			day:date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate(),
-			minute:date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() +" "+
-					date.getHours() + ":" + (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes())
-		};
+		let date = (new Date()).toLocaleString()
 		let newUser = {
 			username:req.body.username,
 			password:req.body.password,
-			regTime:time,
-			lastLogin:time
+			regTime:date,
+			lastLogin:date
 		}
+		console.log(newUser);
 		let hmac = crypto.createHmac('sha256', secretKey)
-		newUser.password = hmac.updata(newUser.password).digest('hex')
-		User.create(req.body,(err,user)=>{
+		newUser.password = hmac.update(newUser.password).digest('hex')
+		User.create(newUser,(err,user)=>{
 			if(err){
 				return res.json({key:'0',err:err})
 			}
@@ -40,7 +34,7 @@ router.post('/reg',(req,res)=>{
 })
 
 router.post('/login',(req,res)=>{
-	User.findOne({},(err,user)=>{
+	User.findOne({username:req.body.username},(err,user)=>{
 		if(err){
 			return res.json({key:'0',err:err})
 		}
@@ -48,12 +42,17 @@ router.post('/login',(req,res)=>{
 			return res.json({key:'0',err:'用户不存在'})
 		}
 		let hmac = crypto.createHmac('sha256', secretKey)
-		let password = hmac.updata(newUser.password).digest('hex')
-		if(password != req.body.password){
+		let password = hmac.update(req.body.password).digest('hex')
+		if(password !== user.password){
 			return res.json({key:'0',err:'密码错误'})
 		}
-		res.json({key:'1',user:user})
-		return res.redirect('/')
+		let date = (new Date()).toLocaleString()
+		User.findOneAndUpdate({username:req.body.username},{$set:{lastLogin:date}},{new:true}).then(user=>{
+			res.json({key:'1',user:user})
+		}).catch(err=>{
+			res.json({key:'0',err:err})
+		})
+/*		return res.redirect('/')*/
 	})
 })
 

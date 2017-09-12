@@ -1,8 +1,8 @@
 <template>
 	<div id="loginBox">
 		<el-form :model="loginBoxForm" :rules="loginRule" ref="loginBoxForm" label-width="100px" class="loginBoxMain">
-			<el-form-item label="手机" prop="username">
-				<el-input v-model="loginBoxForm.username" auto-complete="off" placeholder="请输入手机号码"></el-input>
+			<el-form-item label="用户名" prop="username">
+				<el-input v-model="loginBoxForm.username" auto-complete="off" placeholder="请输入用户名"></el-input>
 			</el-form-item>
 			<el-form-item label="密码" prop="password">
 				<el-input type="password" v-model="loginBoxForm.password" auto-complete="off" placeholder="请输入6-12位密码"></el-input>
@@ -21,10 +21,10 @@ export default {
   data() {
     var validateUsername = (rule,value,callback)=>{
       if(value === ''){
-        return callback(new Error('手机号不能为空'));
+        return callback(new Error('用户名不能为空'));
       }
       if(value.length !== 11){
-        return callback(new Error('请输入正确的手机号码'));
+        return callback(new Error('请输入正确的用户名'));
       }
       return callback();
     }
@@ -60,10 +60,11 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           axios.post('/api/user/login',{
-            username:'212121212',
-            password:'12121221212'
-          }).then()
-          .catch(err=>{
+            username:this.loginBoxForm.username,
+            password:this.loginBoxForm.password
+          }).then(user=>{
+            console.log(user)
+          }).catch(err=>{
             console.log(err);
           })
         } else {

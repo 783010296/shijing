@@ -1,8 +1,8 @@
 <template>
 	<div id="regBox">
 		<el-form :model="regBoxForm" :rules="regRule" ref="regBoxForm" label-width="100px" class="regBoxMain">
-			<el-form-item label="手机" prop="phone">
-				<el-input v-model="regBoxForm.phone" auto-complete="off" placeholder="请输入手机号码"></el-input>
+			<el-form-item label="用户名" prop="username">
+				<el-input v-model="regBoxForm.username" auto-complete="off" placeholder="请输入6-12数字或字母组成的用户名"></el-input>
 			</el-form-item>
 			<el-form-item label="密码" prop="password">
 				<el-input type="password" v-model="regBoxForm.password" auto-complete="off" placeholder="请输入6-12位密码"></el-input>
@@ -18,14 +18,15 @@
 	</div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
-    var validatePhone = (rule,value,callback)=>{
+    var validateUsername = (rule,value,callback)=>{
       if(value === ''){
-        return callback(new Error('手机号不能为空'));
+        return callback(new Error('用户名不能为空'));
       }
-      if(value.length !== 11){
-        return callback(new Error('请输入正确的手机号码'));
+      if((value.length < 6)||(value.length >12)){
+        return callback(new Error('请输入正确的用户名'));
       }
       return callback();
     }
@@ -49,13 +50,13 @@ export default {
     };
     return {
       regBoxForm: {
-        phone: '',
+        username: '',
         password: '',
         checkPass:''
       },
       regRule: {
-        phone: [
-          { validator: validatePhone, trigger: 'blur' }
+        username: [
+          { validator: validateUsername, trigger: 'blur' }
         ],
         password: [
           { validator: validatePassword, trigger: 'blur' }
@@ -70,7 +71,14 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {//valid is boolean
         if (valid) {
-          alert('reg!');
+          axios.post('/api/user/reg',{
+            username:this.regBoxForm.username,
+            password:this.regBoxForm.password
+          }).then((user)=>{
+            console.log(user)
+          }).catch((err)=>{
+            console.log(err)
+          })
         } else {
           console.log('error reg!!');
           return false;
