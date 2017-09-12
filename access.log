@@ -1,0 +1,14 @@
+GET / 200 444 - 5.144 ms
+GET /static/js/manifest.0c2f0acbba026d61e649.js 200 1453 - 4.690 ms
+GET /static/js/app.34109ab9f24f47a7a5ca.js 200 9693 - 5.352 ms
+GET /static/css/app.85ca656f02cdc0e5d1e7695a8c51c1e8.css 200 144774 - 4.412 ms
+GET /static/js/vendor.324a168df3b9cc26050a.js 200 635280 - 5.139 ms
+GET /static/img/background.7eda4b9.jpg 200 32783 - 0.508 ms
+POST /api/user/login 200 32 - 29.833 ms
+::1 - GET / HTTP/1.1 200 444 - 5.018 ms
+::1 - GET /static/js/manifest.0c2f0acbba026d61e649.js HTTP/1.1 200 1453 - 4.204 ms
+::1 - GET /static/js/app.34109ab9f24f47a7a5ca.js HTTP/1.1 200 9693 - 5.813 ms
+::1 - GET /static/css/app.85ca656f02cdc0e5d1e7695a8c51c1e8.css HTTP/1.1 200 144774 - 2.699 ms
+::1 - GET /static/js/vendor.324a168df3b9cc26050a.js HTTP/1.1 200 635280 - 5.289 ms
+::1 - GET /static/img/background.7eda4b9.jpg HTTP/1.1 200 32783 - 0.659 ms
+::1 - POST /api/user/login HTTP/1.1 200 32 - 29.422 ms

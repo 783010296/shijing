@@ -38,6 +38,10 @@ import settings from './settings'
 import mongoose from 'mongoose'
 import user from './src/server/routes/user'
 import bodyParser from 'body-parser'
+import morgan from 'morgan';
+import fs from 'fs';
+import path from 'path';
+
 const app = express()
 
 mongoose.connect(settings.url,{useMongoClient: true})
@@ -47,7 +51,11 @@ mongoose.connection.on('connected', function () {
 });
 mongoose.connection.on('error',function (err) {    
     console.log('Mongoose connection error: ' + err);  
-}); 
+});
+
+
+let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+app.use(morgan('short', {stream: accessLogStream}));
 
 const port = process.env.PORT || 8090
 app.use(bodyParser.json())
