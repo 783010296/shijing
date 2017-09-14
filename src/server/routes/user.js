@@ -9,7 +9,7 @@ const secretKey = 'fd*^$#ygwefugb!#TYTf%&lasgdfiu&*%^';
 router.post('/reg',(req,res)=>{
 	User.find({username:req.body.username},(err,user)=>{
 		if(err){
-			return res.josn({key:'0',err:err})
+			return res.json({key:'0',err:err})
 		}
 		if(user.length !== 0){
 			return res.json({key:'0',err:'用户已存在'})

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const newsSchema = mongoose.Schema({
-	img:String,
+	author:String,
 	title:String,
 	url:String
 })
