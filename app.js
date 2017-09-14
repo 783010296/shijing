@@ -37,6 +37,7 @@ import express from 'express'
 import settings from './settings'
 import mongoose from 'mongoose'
 import user from './src/server/routes/user'
+import news from './src/server/common/fetchData'
 import bodyParser from 'body-parser'
 import morgan from 'morgan';
 import fs from 'fs';
@@ -62,6 +63,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('src/dist'))
 app.use('/api/user',user)
+app.use('/',news)
 app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })

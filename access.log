@@ -12,3 +12,6 @@ POST /api/user/login 200 32 - 29.833 ms
 ::1 - GET /static/js/vendor.324a168df3b9cc26050a.js HTTP/1.1 200 635280 - 5.289 ms
 ::1 - GET /static/img/background.7eda4b9.jpg HTTP/1.1 200 32783 - 0.659 ms
 ::1 - POST /api/user/login HTTP/1.1 200 32 - 29.422 ms
+::1 - GET /fetchData HTTP/1.1 404 148 - 4.981 ms
+::1 - GET /fetchData HTTP/1.1 404 148 - 3.879 ms
+::1 - GET /fetchNews HTTP/1.1 200 130466 - 313.475 ms
