@@ -4,7 +4,7 @@
       <div class="mainHeader">
         <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
         <el-col :span="11">
-          <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
             <el-submenu index="1">
               <template slot="title">我的技术</template>
               <el-menu-item index="1-1">ES6</el-menu-item>
@@ -12,14 +12,17 @@
               <el-menu-item index="1-3">Vuejs</el-menu-item>
               <el-menu-item index="1-4">Reactjs</el-menu-item>
             </el-submenu>
-            <el-menu-item index="2">我的问题</el-menu-item>
-            <el-menu-item index="3">我的收藏</el-menu-item>
+            <el-menu-item index="2">我的收藏</el-menu-item>
+            <el-submenu index="3">
+              <template slot="title">大杂烩</template>
+              <el-menu-item index="pretice/31" >爬取cnode</el-menu-item>
+            </el-submenu>
           </el-menu>
         </el-col>
         <el-col :span="6" style="padding:11px 0">
             <el-input placeholder="搜索一下" icon="search" v-model="input2" :on-icon-click="handleIconClick"></el-input>
         </el-col>
-        <el-col :span="3" style="padding:11px 0;padding-left:30px;color:red">
+        <el-col :span="3" style="padding:11px 0;padding-left:30px;color:red" >
           <el-button type="text" size="large"><a href="#/login">登录</a></el-button>
           <el-button type="text" size="large"><a href="#/reg">注册</a></el-button>
         </el-col>
@@ -40,7 +43,6 @@
   },
   methods:{
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
     },
     handleIconClick(){}
   }
