@@ -7,5 +7,5 @@ const userSchema = mongoose.Schema({
 	lastLogin:String
 })
 
-export default mongoose.model('Users',userSchema)
+mongoose.model('Users',userSchema)
 

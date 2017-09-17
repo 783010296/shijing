@@ -6,4 +6,4 @@ const newsSchema = mongoose.Schema({
 	url:String
 })
 
-export default mongoose.model('News',newsSchema)
+mongoose.model('News',newsSchema)
