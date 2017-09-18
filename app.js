@@ -44,7 +44,11 @@ import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
 
+
 const app = express()
+const session = require('express-session');
+const redisStore = require('connect-redis')(session);
+
 
 mongoose.connect(settings.url,{useMongoClient: true})
 mongoose.Promise = global.Promise
@@ -69,6 +73,15 @@ app.use('/',news)
 app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
+
+app.use(session({
+    resave:false,
+    saveUninitialized: true,
+	secret: settings.cookieSecret,
+	key: settings.db,//cookie name
+	cookie: {maxAge: 1000 * 60 * 30},//30 分钟
+	store: new redisStore()
+}));
 
 app.use(function(err,req,res,next){
 	console.log('err-->',err);

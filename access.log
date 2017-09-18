@@ -282,3 +282,12 @@ POST /api/user/login 200 32 - 29.833 ms
 ::1 - GET /static/nodejs.jpg HTTP/1.1 304 - - 1.096 ms
 ::1 - GET /static/vuejs.jpg HTTP/1.1 304 - - 0.888 ms
 ::1 - GET /static/reactjs.jpg HTTP/1.1 304 - - 1.113 ms
+::1 - GET /api/user/test HTTP/1.1 404 152 - 9.259 ms
+::1 - GET /api/user/test HTTP/1.1 200 18 - 20.212 ms
+::1 - GET /api/user/test HTTP/1.1 304 - - 14.833 ms
+::1 - GET /api/user/test HTTP/1.1 304 - - 26.110 ms
+::1 - GET /api/user/test HTTP/1.1 304 - - 8.932 ms
+::1 - GET /api/user/test HTTP/1.1 200 18 - 20.698 ms
+::1 - GET /api/user/test HTTP/1.1 200 18 - 21.344 ms
+::1 - GET /api/user/test HTTP/1.1 200 18 - 23.206 ms
+::1 - GET /api/user/test HTTP/1.1 200 11 - 64.496 ms
