@@ -1,15 +1,8 @@
 import express from 'express'
 const router = express.Router()
 
-import News from '../models/news'
+import * as newsCtrl from '../controllers/news'
 
-
-router.get('/getNews',(req,res)=>{
-	News.find({}).then(news=>{
-		res.json({key:1,news:news})
-	}).catch(err=>{
-		res.json({key:0,err:err})
-	})
-})
+router.get('/getNews',newsCtrl.getAllNews);
 
 export default router

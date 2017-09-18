@@ -70,4 +70,9 @@ app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
 
+app.use(function(err,req,res,next){
+	console.log('err-->',err);
+	res.json({key:0,err:err})
+})
+
 export default app

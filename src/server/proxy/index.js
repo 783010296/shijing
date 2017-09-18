@@ -1,2 +1,4 @@
-export { newsProxy } from './news'
-export { userProxy } from './user'
+import * as newsProxy from './news'
+import * as userProxy from './user'
+
+export {newsProxy,userProxy}
