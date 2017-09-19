@@ -1,5 +1,8 @@
+import { getUserFromSession } from '../service/getData.js'
+
 export default {
-	login({commit}){
-		commit("LOGIN");
+	async setUserInfo({commit,state}){
+		let awaitObj = await getUserFromSession()
+		commit('SET_USERINFO',awaitObj.userInfo)
 	}
 }

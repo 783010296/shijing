@@ -1,11 +1,10 @@
 const LOGIN = "LOGIN";
 const ADD_COUNT = "ADD_COUNT"
-import { getUser } from '../service/getData'
+
+const SET_USERINFO = "SET_USERINFO"
 
 export default {
-	[LOGIN](state){
-		getUser().then(function(data){
-			console.log(data);
-		})
+	[SET_USERINFO](state,info){
+		state.userInfo = info
 	}
 }

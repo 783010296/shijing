@@ -45,6 +45,11 @@ const login = function(req,res,next){
 			return res.json({key:0,err:'密码错误'})
 		}
 		let date = (new Date()).toLocaleString()
+		req.session.userInfo = {
+			username:user.username,
+			regTime:user.regTime,
+			lastLogin:user.lastLogin
+		}
 		userProxy.updateUserLastLogin(req.body.username,(err,newuser)=>{
 			if(err){
 				return next(err)
@@ -53,4 +58,9 @@ const login = function(req,res,next){
 		})
 	})
 }
-export {reg,login}
+
+const userInfo = function(req,res,next){
+	res.json({key:1,userInfo:req.session.userInfo})
+}
+
+export {reg,login,userInfo}

@@ -67,9 +67,6 @@ const port = process.env.PORT || 8090
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('src/dist'))
-app.use('/api/user',user)
-app.use('/api/pretice',pretice)
-app.use('/',news)
 app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
@@ -78,10 +75,21 @@ app.use(session({
     resave:false,
     saveUninitialized: true,
 	secret: settings.cookieSecret,
-	key: settings.db,//cookie name
+	key: settings.db,
 	cookie: {maxAge: 1000 * 60 * 30},//30 分钟
-	store: new redisStore()
+	store: new redisStore({
+		port: settings.redis_port,
+	    host: settings.redis_host,
+	    db: settings.redis_db,
+	    pass: settings.redis_password,
+	})
 }));
+
+
+app.use('/api/user',user)
+app.use('/api/pretice',pretice)
+app.use('/',news)
+
 
 app.use(function(err,req,res,next){
 	console.log('err-->',err);
