@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<qwe><qwe>
-		<div class="block">
+		<head-top></head-top>
+		<div id="homeBlock">
 			<el-carousel trigger="click" height="400px">
 				<el-carousel-item v-for="(color,index) in colors" :key="color" :style='{background:color}'>
 					<h3>{{ color }}</h3>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	import qwe from '../../components/head'
+	import headTop from '../../components/head'
 	export default {
 		name:'home',
 		data(){
@@ -33,7 +33,7 @@
 			}
 		},
 		components:{
-			qwe
+			headTop
 		},
 		filters:{
 			initTitle(value){
@@ -44,31 +44,31 @@
 </script>
 
 <style>
-	.block h3{
-		text-align:center;
-		margin:50px;
-		font-size:90px;
-	}
-	.el-carousel__arrow{
-		height:100px;
-		width:100px;
-		font-size:40px;
-	}
-	.el-carousel__arrow--left{
-		left:120px;
-	}
-	.el-carousel__arrow--right{
-		right:120px;
-	}
-	.el-carousel__button{
-		width:50px;
-	}
-	.homeImgBox{
-		width:1000px;
-		margin:0 auto!important;
-		padding-top:30px;
-	}
-	.homeImgBox img{
-		width:230px;
-	}
+#homeBlock h3{
+	text-align:center;
+	margin:50px;
+	font-size:90px;
+}
+#homeBlock .el-carousel__arrow{
+	height:100px;
+	width:100px;
+	font-size:40px;
+}
+#homeBlock .el-carousel__arrow--left{
+	left:120px;
+}
+#homeBlock .el-carousel__arrow--right{
+	right:120px;
+}
+#homeBlock .el-carousel__button{
+	width:50px;
+}
+#homeBlock .homeImgBox{
+	width:1000px;
+	margin:0 auto!important;
+	padding-top:30px;
+}
+#homeBlock .homeImgBox img{
+	width:230px;
+}
 </style>

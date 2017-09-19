@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<head-top><head-top>
+		<head-top></head-top>
 		<div id="regBox">
 			<el-form :model="regBoxForm" :rules="regRule" ref="regBoxForm" label-width="100px" class="regBoxMain">
 				<el-form-item label="用户名" prop="username">
@@ -72,6 +72,9 @@
 	      }
 	    };
 	  },
+	  components:{
+			headTop
+		},
 	  methods: {
 	    submitForm(formName) {
 	      this.$refs[formName].validate((valid) => {//valid is boolean

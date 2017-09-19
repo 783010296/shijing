@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<head-top><head-top>
+		<head-top></head-top>
 		<div id="loginBox">
 			<el-form :model="loginBoxForm" :rules="loginRule" ref="loginBoxForm" label-width="100px" class="loginBoxMain">
 				<el-form-item label="用户名" prop="username">
