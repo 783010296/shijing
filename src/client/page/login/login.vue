@@ -62,7 +62,7 @@
 		},
 	  methods: {
 	    ...mapActions([
-	      'login'
+	      'setUserInfo'
 	    ]),
 	    submitForm(formName) {
 	      this.$refs[formName].validate((valid) => {
@@ -71,9 +71,10 @@
 	            username:this.loginBoxForm.username,
 	            password:this.loginBoxForm.password
 	          }).then(user=>{
+	          	this.setUserInfo()
 	            console.log(user)
 	          }).catch(err=>{
-	            console.log(err);
+	            console.log(err)
 	          })
 	        } else {
 	          console.log('error LOGIN!!');

@@ -6,7 +6,7 @@ import home from '../page/home/home'
 import pretice31 from '../components/3-1.vue'
 import login from '../page/login/login'
 import reg from '../page/reg/reg'
-
+import search from '../page/search/search'
 
 Vue.use(Router)
 
@@ -19,6 +19,10 @@ export default new Router({
       name:'home',
       component:home
     },{
+      path:'/home',
+      name:'home',
+      component:home
+    },{
       path:'/login',
       name:'login',
       component:login
@@ -26,6 +30,14 @@ export default new Router({
       path:'/reg',
       name:'reg',
       component:reg
+    },{
+      path:'/search',
+      name:'search',
+      component:search
+    },{
+      path:'*',
+      name:'home',
+      component:home
     }]
   }]
 })

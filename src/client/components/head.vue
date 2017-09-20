@@ -2,7 +2,7 @@
 	<header id="header">
 	  <div class="mainHeader">
 	    <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
-	    <el-col :span="11">
+	    <el-col :span="10">
 	      <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  router>
 	        <el-submenu index="1">
 	          <template slot="title">我的技术</template>
@@ -21,19 +21,20 @@
 	    <el-col :span="6" style="padding:11px 0">
 	        <el-input placeholder="搜索一下" icon="search" v-model="search" :on-icon-click="handleIconClick"></el-input>
 	    </el-col>
-	    <el-col :span="3" style="padding:11px 0;padding-left:30px;" v-if="!userInfo">
+	    <el-col :span="4" style="padding:11px 0;text-align:right" v-if="!userInfo">
 	      <el-button type="text" size="large"><a href="#/login">登录</a></el-button>
 	      <el-button type="text" size="large"><a href="#/reg">注册</a></el-button>
 	    </el-col>
-	    <el-col :span="3" style="padding:11px 0;padding-left:30px;" v-else>
+	    <el-col :span="4" style="padding:11px 0;text-align:right" v-else>
 	      <el-button type="text" size="large"><a href="#/">{{userInfo.username}}</a></el-button>
+        <el-button type="text" size="large" @click="logout">退出</el-button>
 	    </el-col>
 	  </div>
 	</header>
 </template>
 
 <script>
-  import { mapState,mapActions } from 'vuex' 
+  import { mapState,mapActions } from 'vuex'
   export default {
     name:'head',
     data(){
@@ -49,9 +50,14 @@
     },
     methods:{
       ...mapActions([
-        'setUserInfo'
+        'setUserInfo','delUserInfo'
       ]),
-      handleIconClick(){}
+      handleIconClick(){
+        this.$router.push({path:'search',query:{keyword:this.search}})
+      },
+      logout(){
+        this.delUserInfo();
+      }
     },
     mounted(){
       this.setUserInfo()

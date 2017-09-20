@@ -59,8 +59,13 @@ const login = function(req,res,next){
 	})
 }
 
-const userInfo = function(req,res,next){
+const getUserInfoFromSession = function(req,res,next){
 	res.json({key:1,userInfo:req.session.userInfo})
 }
 
-export {reg,login,userInfo}
+const delUserInfoFromSession = function(req,res,next){
+	req.session.userInfo = null
+	res.json({key:1})
+}
+
+export {reg,login,getUserInfoFromSession,delUserInfoFromSession}

@@ -5,7 +5,8 @@ import * as userCtrl from '../controllers/user'
 
 router.post('/reg',userCtrl.reg)
 router.post('/login',userCtrl.login)
-router.get('/userInfo',userCtrl.userInfo)
+router.get('/getUserInfo',userCtrl.getUserInfoFromSession)
+router.get('/delUserInfo',userCtrl.delUserInfoFromSession)
 
 router.get('/test',(req,res,next)=>{
 	if(req.session.count){
