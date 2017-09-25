@@ -284,22 +284,25 @@
 	}
 </script>
 <style>
+#myDatePicker{
+	text-align:center;
+}
 #myDatePicker>div:nth-child(1){
 	background:#FFFFFF;
 	display:flex;
-	height:0.5rem;
-	line-height:0.5rem;
+	height:50px;
+	line-height:50px;
 }
 #myDatePicker>div:nth-child(1)>span{
 	flex:1
 }
 .currentItem{
-	border-bottom:0.04rem solid #716eed;
+	border-bottom:4px solid #716eed;
 }
 #myDatePicker>div:nth-child(2){
 	display:flex;
-	height:0.5rem;
-	line-height:0.5rem;
+	height:50px;
+	line-height:50px;
 }
 #myDatePicker>div:nth-child(2)>span{
 	flex:1
