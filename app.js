@@ -37,7 +37,7 @@ import express from 'express'
 import settings from './settings'
 import mongoose from 'mongoose'
 import user from './src/server/routes/user'
-import pretice from './src/server/routes/pretice'
+import more from './src/server/routes/more'
 import news from './src/server/common/fetchData'
 import bodyParser from 'body-parser'
 import morgan from 'morgan';
@@ -87,7 +87,7 @@ app.use(session({
 
 
 app.use('/api/user',user)
-app.use('/api/pretice',pretice)
+app.use('/api/more',more)
 app.use('/',news)
 
 

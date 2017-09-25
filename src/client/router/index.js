@@ -7,6 +7,7 @@ import login from '../page/login/login'
 import reg from '../page/reg/reg'
 import search from '../page/search/search'
 import more31 from '../page/more/3-1'
+import more32 from '../page/more/3-2'
 import notfound from '../page/error/notfound'
 
 Vue.use(Router)
@@ -17,7 +18,6 @@ export default new Router({
     component: App,
     children: [{
       path:'',
-      name:'home',
       component:home
     },{
       path:'/home',
@@ -36,15 +36,15 @@ export default new Router({
       name:'search',
       component:search
     },{
-      path:'/more',
-      children:[{
-        path:'31',
-        name:'more31'
-        component:more31
-      }]
+      path:'/more/31',
+      name:'more31',
+      component:more31
+    },{
+      path:'/more/32',
+      name:'more32',
+      component:more32
     },{
       path:'*',
-      name:'home',
       component:home
     }]
   }]

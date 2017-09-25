@@ -3,7 +3,7 @@
 	  <div class="mainHeader">
 	    <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
 	    <el-col :span="10">
-	      <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  router>
+	      <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" >
 	        <el-submenu index="1">
 	          <template slot="title">我的技术</template>
 	          <el-menu-item index="1-1">ES6</el-menu-item>
@@ -14,7 +14,8 @@
 	        <el-menu-item index="2">我的收藏</el-menu-item>
 	        <el-submenu index="3">
 	          <template slot="title">大杂烩</template>
-	          <el-menu-item index="pretice/31" >爬取cnode</el-menu-item>
+	          <el-menu-item index="more/31" @click="headGoTo('more31')" >爬取cnode</el-menu-item>
+            <el-menu-item index="more/32" @click="headGoTo('more32')" >时间组件</el-menu-item>
 	        </el-submenu>
 	      </el-menu>
 	    </el-col>
@@ -53,10 +54,13 @@
         'setUserInfo','delUserInfo'
       ]),
       handleIconClick(){
-        this.$router.push({path:'search',query:{keyword:this.search}})
+        this.$router.push({name:'search',query:{keyword:this.search}})
       },
       logout(){
         this.delUserInfo();
+      },
+      headGoTo(name){
+        this.$router.push({name:name})
       }
     },
     mounted(){
