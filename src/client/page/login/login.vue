@@ -21,7 +21,7 @@
 <script>
 	import headTop from '../../components/head'
 	import {mapActions} from 'vuex'
-	import axios from 'axios'
+	import { login } from '../../service/getData'
 	export default {
 	  data() {
 	    var validateUsername = (rule,value,callback)=>{
@@ -65,16 +65,30 @@
 	      'setUserInfo'
 	    ]),
 	    submitForm(formName) {
-	      this.$refs[formName].validate((valid) => {
+	    	let _this = this;
+	      _this.$refs[formName].validate(async (valid) => {
 	        if (valid) {
-	          axios.post('/api/user/login',{
-	            username:this.loginBoxForm.username,
-	            password:this.loginBoxForm.password
-	          }).then(user=>{
-	          	this.setUserInfo()
+	        	let info = await login(_this.loginBoxForm)
+	        	info.then(user=>{
+	          	_this.setUserInfo()
 	            console.log(user)
+	            _this.$notify({
+			          title: '登录成功',
+			          message: '这是一条成功的提示消息',
+			          type: 'success',
+			          duration:'3000',
+			          onClose:function(){
+			          	_this.$router.push("/")
+			          }
+			        });
 	          }).catch(err=>{
 	            console.log(err)
+	            _this.$notify({
+			          title: '登录失败',
+			          message: err,
+			          type: 'error',
+			          duration:'3000'
+			        });
 	          })
 	        } else {
 	          console.log('error LOGIN!!');

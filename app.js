@@ -36,6 +36,7 @@ module.exports = app*/
 import express from 'express'
 import settings from './settings'
 import mongoose from 'mongoose'
+import history from 'connect-history-api-fallback'
 import user from './src/server/routes/user'
 import more from './src/server/routes/more'
 import news from './src/server/common/fetchData'
@@ -70,6 +71,9 @@ app.use(express.static('src/dist'))
 app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
+app.use(history({
+	index: '/index.html'
+}))
 
 app.use(session({
     resave:false,

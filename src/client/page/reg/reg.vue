@@ -23,7 +23,7 @@
 
 <script>
 	import headTop from '../../components/head'
-	import axios from 'axios'
+	import { reg } from '../../service/getData'
 	export default {
 	  data() {
 	    var validateUsername = (rule,value,callback)=>{
@@ -77,15 +77,29 @@
 		},
 	  methods: {
 	    submitForm(formName) {
-	      this.$refs[formName].validate((valid) => {//valid is boolean
+	    	let _this = this
+	      _this.$refs[formName].validate(async (valid) => {//valid is boolean
 	        if (valid) {
-	          axios.post('/api/user/reg',{
-	            username:this.regBoxForm.username,
-	            password:this.regBoxForm.password
-	          }).then((user)=>{
+	        	let info = await reg(_this.regBoxForm)
+	        	info.then((user)=>{
 	            console.log(user)
+	            _this.$notify({
+			          title: '注册成功',
+			          message: '这是一条成功的提示消息',
+			          type: 'success',
+			          duration:'3000',
+			          onClose:function(){
+			          	_this.$router.push("/")
+			          }
+			        });
 	          }).catch((err)=>{
 	            console.log(err)
+	            _this.$notify({
+			          title: '注册失败',
+			          message: err,
+			          type: 'error',
+			          duration:'3000'
+			        });
 	          })
 	        } else {
 	          console.log('error reg!!');

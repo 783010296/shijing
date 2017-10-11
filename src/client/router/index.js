@@ -13,6 +13,7 @@ import notfound from '../page/error/notfound'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [{
     path: '/',
     component: App,

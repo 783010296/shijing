@@ -23,11 +23,17 @@
 	        <el-input placeholder="搜索一下" icon="search" v-model="search" :on-icon-click="handleIconClick"></el-input>
 	    </el-col>
 	    <el-col :span="4" style="padding:11px 0;text-align:right" v-if="!userInfo">
-	      <el-button type="text" size="large"><a href="#/login">登录</a></el-button>
-	      <el-button type="text" size="large"><a href="#/reg">注册</a></el-button>
+        <el-button type="text" size="large">
+          <router-link to="/login">登录</router-link>
+        </el-button>
+	      <el-button type="text" size="large">
+          <router-link to="/reg">注册</router-link>
+        </el-button>
 	    </el-col>
 	    <el-col :span="4" style="padding:11px 0;text-align:right" v-else>
-	      <el-button type="text" size="large"><a href="#/">{{userInfo.username}}</a></el-button>
+	      <el-button type="text" size="large">
+          <router-link :to="{path:'/'}">{{userInfo.username}}</router-link>
+        </el-button>
         <el-button type="text" size="large" @click="logout">退出</el-button>
 	    </el-col>
 	  </div>
