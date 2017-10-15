@@ -60,6 +60,7 @@ mongoose.connection.on('error',function (err) {
     console.log('Mongoose connection error: ' + err);  
 });
 
+app.use(history())
 
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 app.use(morgan('short', {stream: accessLogStream}));
@@ -71,9 +72,6 @@ app.use(express.static('src/dist'))
 app.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
-app.use(history({
-	index: '/index.html'
-}))
 
 app.use(session({
     resave:false,

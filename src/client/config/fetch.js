@@ -30,7 +30,7 @@ axios.interceptors.response.use(function (response) {
 // 返回在vue模板中的调用接口
 export default function (method, url, params) {
   return new Promise((resolve, reject) => {
-    if (params) {
+    if (method === 'GET' || method === 'DELETE') {
       params = qs.stringify(params)
     }
     axios({

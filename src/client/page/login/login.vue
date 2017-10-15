@@ -66,29 +66,33 @@
 	    ]),
 	    submitForm(formName) {
 	    	let _this = this;
-	      _this.$refs[formName].validate(async (valid) => {
+	      	_this.$refs[formName].validate(async (valid) => {
 	        if (valid) {
-	        	let info = await login(_this.loginBoxForm)
-	        	info.then(user=>{
-	          	_this.setUserInfo()
-	            console.log(user)
-	            _this.$notify({
-			          title: '登录成功',
-			          message: '这是一条成功的提示消息',
-			          type: 'success',
-			          duration:'3000',
-			          onClose:function(){
-			          	_this.$router.push("/")
-			          }
-			        });
+	        	login(_this.loginBoxForm).then(user=>{
+	        		if(user.key){
+								_this.setUserInfo()
+		            console.log(user)
+		            _this.$notify({
+				          title: '登录成功',
+				          message: '这是一条成功的提示消息',
+				          type: 'success',
+				          duration:'3000',
+				          onClose:function(){
+				          	_this.$router.push("/")
+				          }
+				        });
+	        		}else{
+	        			_this.$notify({
+				          title: '登录失败',
+				          message: user.err,
+				          type: 'error',
+				          duration:'3000'
+				        });
+	        		}
+	          	
 	          }).catch(err=>{
 	            console.log(err)
-	            _this.$notify({
-			          title: '登录失败',
-			          message: err,
-			          type: 'error',
-			          duration:'3000'
-			        });
+	            
 	          })
 	        } else {
 	          console.log('error LOGIN!!');

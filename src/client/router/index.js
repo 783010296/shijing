@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import App from '../App'
-import home from '../page/home/home'
-import login from '../page/login/login'
-import reg from '../page/reg/reg'
-import search from '../page/search/search'
-import more31 from '../page/more/3-1'
-import more32 from '../page/more/3-2'
-import notfound from '../page/error/notfound'
+const App = r => require.ensure([], () => r(require('../App')), 'app')
+const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
+const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
+const reg = r => require.ensure([], () => r(require('../page/reg/reg')), 'reg')
+const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
+const more31 = r => require.ensure([], () => r(require('../page/more/3-1')), 'more31')
+const more32 = r => require.ensure([], () => r(require('../page/more/3-2')), 'more32')
+const more33 = r => require.ensure([], () => r(require('../page/more/3-3')), 'more33')
+const notfound = r => require.ensure([], () => r(require('../page/error/notfound')), 'notfound')
 
 Vue.use(Router)
 
@@ -45,8 +46,12 @@ export default new Router({
       name:'more32',
       component:more32
     },{
+      path:'/more/33',
+      name:'more33',
+      component:more33
+    },{
       path:'*',
-      component:home
+      component:notfound
     }]
   }]
 })
