@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
 	time:String,//文章时间
 	author:String,//文章作者
 	pv:String,//文章阅读量
-	code:String//文章表示码
+	code:String//文章标识码
 })
 
 mongoose.model('Posts',postSchema)//建表Post

@@ -41,7 +41,30 @@ export const addPost = (postObj) => fetch("POST",'/api/post/add',{
 	post:postObj.post
 })
 
+/**
+ *查看文章
+ */
+export const find = (code) => fetch("GET",'api/post/find',{
+	code:code
+})
 
+
+/**
+ *
+ */
+
+
+/**
+ *
+ */
+
+/**
+ *
+ */
+
+/**
+ *
+ */
 
 /**
  *

@@ -21,4 +21,14 @@ const add = function(req,res,next){
 		return res.json({key:1,post:post})
 	})
 }
-export { add }
+
+const find = function(req,res,next){
+	postProxy.find(req.params.code,(err,posts)=>{
+		if(err){
+			return next(err)
+		}
+		return res.json({key:1,posts:posts})
+	})
+}
+
+export { add,find }

@@ -16,7 +16,7 @@
 	          <template slot="title">大杂烩</template>
 	          <el-menu-item index="more/31" @click="headGoTo('more31')" >爬取cnode</el-menu-item>
             <el-menu-item index="more/32" @click="headGoTo('more32')" >时间组件</el-menu-item>
-            <el-menu-item index="more/33" @click="headGoTo('more33')" >写文字</el-menu-item>
+            <el-menu-item index="more/33" @click="headGoTo('more33')" v-if="userInfo">写文章</el-menu-item>
 	        </el-submenu>
 	      </el-menu>
 	    </el-col>

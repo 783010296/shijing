@@ -12,3 +12,7 @@ export const createPost = function(obj,callback){
 	post.code = obj.code
 	post.save(callback)
 }
+
+export const find = function(code,callback){
+	postModel.find({code:code},callback)
+}
