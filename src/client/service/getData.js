@@ -34,8 +34,15 @@ export const reg = (userObj) => fetch('POST','/api/user/reg',{
 })
 
 /**
- *
+ *发文章
  */
+export const addPost = (postObj) => fetch("POST",'/api/post/add',{
+	title:postObj.title,
+	post:postObj.post
+})
+
+
+
 /**
  *
  */

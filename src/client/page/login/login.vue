@@ -66,7 +66,7 @@
 	    ]),
 	    submitForm(formName) {
 	    	let _this = this;
-	      	_this.$refs[formName].validate(async (valid) => {
+	      	_this.$refs[formName].validate((valid) => {
 	        if (valid) {
 	        	login(_this.loginBoxForm).then(user=>{
 	        		if(user.key){

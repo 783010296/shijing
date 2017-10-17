@@ -11,11 +11,12 @@
 	          <el-menu-item index="1-3">Vuejs</el-menu-item>
 	          <el-menu-item index="1-4">Reactjs</el-menu-item>
 	        </el-submenu>
-	        <el-menu-item index="2">我的收藏</el-menu-item>
+	        <el-menu-item index="2" @click="headGoTo('allPost')">我的收藏</el-menu-item>
 	        <el-submenu index="3">
 	          <template slot="title">大杂烩</template>
 	          <el-menu-item index="more/31" @click="headGoTo('more31')" >爬取cnode</el-menu-item>
             <el-menu-item index="more/32" @click="headGoTo('more32')" >时间组件</el-menu-item>
+            <el-menu-item index="more/33" @click="headGoTo('more33')" >写文字</el-menu-item>
 	        </el-submenu>
 	      </el-menu>
 	    </el-col>

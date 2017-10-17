@@ -39,6 +39,7 @@ import mongoose from 'mongoose'
 import history from 'connect-history-api-fallback'
 import user from './src/server/routes/user'
 import more from './src/server/routes/more'
+import post from './src/server/routes/post'
 import news from './src/server/common/fetchData'
 import bodyParser from 'body-parser'
 import morgan from 'morgan';
@@ -90,6 +91,7 @@ app.use(session({
 
 app.use('/api/user',user)
 app.use('/api/more',more)
+app.use('/api/post',post)
 app.use('/',news)
 
 

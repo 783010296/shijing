@@ -7,7 +7,7 @@
 					<el-input v-model="post.title"></el-input>
 				</el-form-item>
 				<el-form-item label="文章内容">
-			    <el-input type="textarea" v-model="post.body" :rows="13"></el-input>
+			    <el-input type="textarea" v-model="post.post" :rows="13"></el-input>
 			  </el-form-item>
 				<el-form-item>
 			    <el-button type="primary" @click="onSubmit">发布</el-button>
@@ -19,19 +19,25 @@
 
 <script>
 	import headTop from '../../components/head'
+	import { addPost } from '../../service/getData'
 	export default {
 		data(){
 			return {
 				post:{
 					title:"",
-					body:""
+					post:""
 				}
 
 			}
 		},
-		method:{
+		methods:{
 			onSubmit(){
-
+				let _this = this
+				addPost(_this.post).then((post)=>{
+					console.log(post)
+				}).catch((err)=>{
+					console.log(err)
+				})
 			}
 		},
 		components:{

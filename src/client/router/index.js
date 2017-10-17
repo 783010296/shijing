@@ -10,6 +10,7 @@ const more31 = r => require.ensure([], () => r(require('../page/more/3-1')), 'mo
 const more32 = r => require.ensure([], () => r(require('../page/more/3-2')), 'more32')
 const more33 = r => require.ensure([], () => r(require('../page/more/3-3')), 'more33')
 const notfound = r => require.ensure([], () => r(require('../page/error/notfound')), 'notfound')
+const allPost = r => require.ensure([], () => r(require('../page/post/allPost')), 'allPost')
 
 Vue.use(Router)
 
@@ -49,6 +50,10 @@ export default new Router({
       path:'/more/33',
       name:'more33',
       component:more33
+    },{
+      path:'/post',
+      name:'allPost',
+      component:allPost
     },{
       path:'*',
       component:notfound
