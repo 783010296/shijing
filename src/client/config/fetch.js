@@ -1,53 +1,74 @@
-import axios from 'axios'
-import qs from 'qs'
+export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
+  type = type.toUpperCase();
 
-axios.defaults.timeout = 5000    // 响应时间
-axios.defaults.withCredentials = true
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'  // 配置请求头
-// axios.defaults.baseURL = '你的接口地址' // 配置接口地址
+  if (type == 'GET') {
+    let dataStr = ''; //数据拼接字符串
+    Object.keys(data).forEach(key => {
+      dataStr += key + '=' + data[key] + '&';
+    })
 
-// 添加一个请求拦截器
-axios.interceptors.request.use(function (config) {
-  // 在请求发送之前做一些事
-  if (config.method === 'post') {
-    config.data = qs.stringify(config.data)
-  }
-  return config
-}, function (error) {
-  // 当出现请求错误是做一些事
-  return Promise.reject(error)
-})
-
-// 添加一个返回拦截器
-axios.interceptors.response.use(function (response) {
-  // 对返回的数据进行一些处理
-  return response
-}, function (error) {
-  // 对返回的错误进行一些处理
-  return Promise.reject(error)
-})
-
-// 返回在vue模板中的调用接口
-export default function (method, url, params) {
-  return new Promise((resolve, reject) => {
-    if (method === 'GET' || method === 'DELETE') {
-      params = qs.stringify(params)
+    if (dataStr !== '') {
+      dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
+      url = url + '?' + dataStr;
     }
-    axios({
-      method: method,
-      url: url,
-      data: method === 'POST' || method === 'PUT' ? params : null,
-      params: method === 'GET' || method === 'DELETE' ? params : null,
-      // baseURL: root,
-      withCredentials: false
+  }
+
+  if (window.fetch && method == 'fetch') {
+    let requestConfig = {
+      credentials: 'include',
+      method: type,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      mode: "cors",
+      cache: "force-cache"
+    }
+
+    if (type == 'POST') {
+      Object.defineProperty(requestConfig, 'body', {
+        value: JSON.stringify(data)
+      })
+    }
+    
+    try {
+      const response = await fetch(url, requestConfig);
+      const responseJson = await response.json();
+      return responseJson
+    } catch (error) {
+      throw new Error(error)
+    }
+  } else {
+    return new Promise((resolve, reject) => {
+      let requestObj;
+      if (window.XMLHttpRequest) {
+        requestObj = new XMLHttpRequest();
+      } else {
+        requestObj = new ActiveXObject;
+      }
+
+      let sendData = '';
+      if (type == 'POST') {
+        sendData = JSON.stringify(data);
+      }
+
+      requestObj.open(type, url, true);
+      requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      requestObj.send(sendData);
+
+      requestObj.onreadystatechange = () => {
+        if (requestObj.readyState == 4) {
+          if (requestObj.status == 200) {
+            let obj = requestObj.response
+            if (typeof obj !== 'object') {
+              obj = JSON.parse(obj);
+            }
+            resolve(obj)
+          } else {
+            reject(requestObj)
+          }
+        }
+      }
     })
-    .then(response => {
-      resolve(response.data)
-    }, err => {
-      reject(err)
-    })
-    .catch((error) => {
-      reject(error)
-    })
-  })
+  }
 }

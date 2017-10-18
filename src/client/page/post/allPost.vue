@@ -27,6 +27,7 @@
 		},
 		mounted(){
 			find().then(post=>{
+				this.table = post
 				console.log(post)
 			}).catch(err=>{
 				console.log(err)

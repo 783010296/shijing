@@ -23,7 +23,7 @@ const add = function(req,res,next){
 }
 
 const find = function(req,res,next){
-	postProxy.find(req.params.code,(err,posts)=>{
+	postProxy.find(req.query.code,(err,posts)=>{
 		if(err){
 			return next(err)
 		}
