@@ -23,7 +23,8 @@
 		},
 		mounted(){
 			postFindOne(this.$route.params.code).then(post=>{
-				this.post = post.posts[0]
+				this.post = post.posts
+
 			}).catch(err=>{
 				console.log(err)
 			})

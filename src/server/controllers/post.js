@@ -22,8 +22,8 @@ const add = function(req,res,next){
 	})
 }
 
-const find = function(req,res,next){
-	postProxy.find(req.query.code,(err,posts)=>{
+const findOne = function(req,res,next){
+	postProxy.findOne(req.query.code,(err,posts)=>{
 		if(err){
 			return next(err)
 		}
@@ -31,4 +31,13 @@ const find = function(req,res,next){
 	})
 }
 
-export { add,find }
+const findAll = function(req,res,next){
+	postProxy.findAll((err,posts)=>{
+		if(err){
+			return next(err)
+		}
+		return res.json({key:1,posts:posts})
+	})
+}
+
+export { add,findOne,findAll }

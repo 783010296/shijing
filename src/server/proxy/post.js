@@ -13,11 +13,16 @@ export const createPost = function(obj,callback){
 	post.save(callback)
 }
 
-export const find = function(code,callback){
-	if(code){
-		postModel.find({code:code},callback)
-	}else{
-		postModel.find({},callback)
-	}
-	
+export const findOne = function(code,callback){
+	postModel.findOne({code:code},function(err,post){
+		if(err){
+			return callback(err)
+		}
+		post.pv = post.pv - 0 + 1
+		post.save(callback)
+	})
+}
+
+export const findAll = function(callback){
+	postModel.find({},callback)
 }
