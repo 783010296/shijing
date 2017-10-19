@@ -11,18 +11,18 @@
 
 <script>
 	import headTop from '../../components/head'
-	import { find } from '../../service/getData'
+	import { postFindOne } from '../../service/getData'
 	export default {
 		data(){
 			return {
-				post:null
+				post:{}
 			}
 		},
 		components:{
 			headTop
 		},
 		mounted(){
-			find(this.$route.params.code).then(post=>{
+			postFindOne(this.$route.params.code).then(post=>{
 				this.post = post.posts[0]
 			}).catch(err=>{
 				console.log(err)

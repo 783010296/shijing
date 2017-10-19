@@ -14,5 +14,10 @@ export const createPost = function(obj,callback){
 }
 
 export const find = function(code,callback){
-	postModel.find({code:code},callback)
+	if(code){
+		postModel.find({code:code},callback)
+	}else{
+		postModel.find({},callback)
+	}
+	
 }
