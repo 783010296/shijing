@@ -80,6 +80,7 @@
 	    	let _this = this
 	      _this.$refs[formName].validate((valid) => {//valid is boolean
 	        if (valid) {
+	        	console.log(_this.regBoxForm)
 	        	reg(_this.regBoxForm).then((user)=>{
 	        		if(user.key){
 		        		console.log(user)
