@@ -61,7 +61,7 @@ mongoose.connection.on('error',function (err) {
     console.log('Mongoose connection error: ' + err);  
 });
 
-/*app.use(history())*/
+app.use(history())
 
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 app.use(morgan('short', {stream: accessLogStream}));
