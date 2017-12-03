@@ -36,6 +36,8 @@ module.exports = app*/
 import express from 'express'
 import settings from './settings'
 import mongoose from 'mongoose'
+import socketIO from 'socket.io'
+import http from 'http'
 import history from 'connect-history-api-fallback'
 import user from './src/server/routes/user'
 import more from './src/server/routes/more'
@@ -66,11 +68,25 @@ app.use(history())
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 app.use(morgan('short', {stream: accessLogStream}));
 
+
+//socket.io
+const server = http.createServer(app);
+const io = socketIO.listen(server)
+io.on('connection', function (socket) {
+  socket.on('sendMsg', function(data) {
+      socket.broadcast.emit('getMsg', data)
+  })
+})
+
+
+
+
+
 const port = process.env.PORT || 8090
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('src/dist'))
-app.listen(port,() => {
+server.listen(port,() => {
 	console.log('app is listening on port 8090')
 })
 

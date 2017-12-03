@@ -47,7 +47,7 @@
 
 </script>
 
-<style>
+<style scoped>
 #more33{
 	width:1000px;
 	margin:0 auto;
