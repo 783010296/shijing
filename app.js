@@ -76,6 +76,9 @@ io.on('connection', function (socket) {
   socket.on('sendMsg', function(data) {
       socket.broadcast.emit('getMsg', data)
   })
+  socket.on('coming', function(data) {
+    console.log(data+'--已经上线')
+  })
 })
 
 
