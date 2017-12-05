@@ -7,12 +7,22 @@
           <img :src="allmsg.myheadUrl"></img>
           <div>
             <span>{{allmsg.name}}</span>
-            <div>{{allmsg.msg}}</div>
+            <div v-html="allmsg.msg"></div>
           </div>
         </div>
       </div>
+      <el-popover
+        ref="popover"
+        placement="top"
+        title="标题"
+        width="600"
+        trigger="click"
+        v-model = "popoverValue">
+        <img v-for="i in 68" :src="'http://hichat.herokuapp.com/content/emoji/'+(i+1)+'.gif'" class="emojiImg" @click="sendEmoji(i+1)">
+      </el-popover>
       <div style="margin-top: 15px;">
         <el-input placeholder="请输入内容" v-model="msg" @keyup.enter.native="send">
+          <el-button slot="prepend" v-popover:popover>表情</el-button>
           <el-button slot="append" type="primary" @click="send" > 发送 </el-button>
         </el-input>
       </div>
@@ -54,7 +64,7 @@
         myHead:0,
         myheadUrl:"",
         girlHeads:[
-          'http://img5.duitang.com/uploads/item/201412/17/20141217124439_EmxBP.jpeg',
+          'http://scimg.jb51.net/allimg/160706/103-160F6095531355.jpg',
           'https://img.qq1234.org/uploads/allimg/150403/15052U595-3.jpg',
           'http://dynamic-image.yesky.com/600x-/uploadImages/upload/20140905/xnqtzgkk5y4png.png',
           'http://f.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=4b4e573efdfaaf5184b689b9bc64b8d6/1b4c510fd9f9d72ae50cef05d42a2834349bbbba.jpg',
@@ -67,7 +77,9 @@
           'http://i0.sinaimg.cn/ty/s/2012-01-11/1326214455_X0EHbR.jpg',
           'http://www.touxiangdaquan.net/uploads/allimg/c150407/142S91CQ5K0-456054.jpg'
         ],
-        myFasle:false
+        myFasle:false,
+        emoji:1,
+        popoverValue:false
       }
     },
     methods:{
@@ -81,6 +93,11 @@
             name:_this.name,
             myheadUrl:_this.myheadUrl
           }
+          var match,reg = /\[emoji:(\d+)\]/g,result = currentMsg.msg;
+          while (match = reg.exec(currentMsg.msg)) {
+              result = result.replace(match[0], '<img class="emoji" src="http://hichat.herokuapp.com/content/emoji/' + match[1] + '.gif" />');
+          };
+          currentMsg.msg = result
           socket.emit('sendMsg', currentMsg)
           this.addMsg(currentMsg)
         }
@@ -117,6 +134,11 @@
         }else{
           this.$message.error('错了哦，昵称不能为空');
         }
+      },
+      sendEmoji(i){
+        this.emoji = i;
+        this.msg += `[emoji:${i}]`
+        this.popoverValue = false;
       }
     },
     watch:{
@@ -157,7 +179,7 @@
 }
 
 .boxContentLeft{
-  overflow:hidden;n
+  overflow:hidden;
   margin:15px 0;
 }
 .boxContentLeft span{
@@ -178,10 +200,9 @@
 }
 .boxContentLeft>div>div{
   background:#36c8f3;
-  line-height:50px;
   margin-left:30px;
   position:relative;
-  padding:0 20px;
+  padding:10px 20px;
   max-width:400px;
 }
 .boxContentLeft>div>div:before{
@@ -219,10 +240,9 @@
 }
 .boxContentRight>div>div{
   background:#36c8f3;
-  line-height:50px;
   margin-right:30px;
   position:relative;
-  padding:0 20px;
+  padding:10px 20px;
   max-width:400px;
 }
 .boxContentRight>div>div:after{
@@ -247,5 +267,15 @@
 }
 .headActive{
   border:1px solid red;
+}
+.emojiImg{
+  display:inline-block;
+  width:40px;
+  height:40px;
+  margin:5px;
+  border:1px solid #000;
+}
+.emojiImg:hover{
+  border:1px solid #0825ff;
 }
 </style>
