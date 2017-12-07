@@ -27,11 +27,8 @@
         </el-input>
       </div>
     </div>
-    <el-dialog title="提示" :visible.sync="dialogFormVisible" width="30%" :close-on-click-modal="myFasle" :close-on-press-escape="myFasle" :show-close="myFasle" >
+    <el-dialog title="请输入昵称并选择头像" :visible.sync="dialogFormVisible" width="30%" :close-on-click-modal="myFasle" :close-on-press-escape="myFasle" :show-close="myFasle" >
       <el-form>
-        <el-form-item label="请输入昵称并选择头像">
-          <el-input v-model="name" auto-complete="off"></el-input>
-        </el-form-item>
         <div>
           <el-radio-group v-model="radio" @change="radioChange">
             <el-radio label="1" border>男生</el-radio>
@@ -48,6 +45,7 @@
 </template>
 
 <script>
+  import { mapState,mapActions } from 'vuex'
   import headTop from '../../components/head'
   import { addPost } from '../../service/getData'
   import io from 'socket.io-client';
@@ -82,6 +80,11 @@
         popoverValue:false
       }
     },
+    computed:{
+      ...mapState([
+        'userInfo'
+      ])
+    },
     methods:{
       send(){
         let _this = this;
@@ -90,7 +93,6 @@
             name:_this.name,
             msg:_this.msg.trim(),
             isMe:false,
-            name:_this.name,
             myheadUrl:_this.myheadUrl
           }
           var match,reg = /\[emoji:(\d+)\]/g,result = currentMsg.msg;
@@ -123,12 +125,12 @@
         this.myheadUrl = this.heads[this.myHead]
       },
       dialogSure(){
-        if(/\S+/.test(this.name.trim())){
-          this.name = this.name.trim()
+        if(this.myheadUrl){
+          this.name = this.userInfo.username
           this.dialogFormVisible = false
           this.$message({
             type: 'success',
-            message: '你的昵称是: ' + this.name
+            message: '已选择聊天头像'
           })
           socket.emit('coming', this.name)
         }else{

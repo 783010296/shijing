@@ -16,6 +16,7 @@
 <script>
 import axios from 'axios'
 import headTop from '../../components/head'
+import { fetchNews } from '../../service/getData'
 export default {
   data(){
   	return{
@@ -42,6 +43,11 @@ export default {
     }
   },
   mounted(){
+    fetchNews().then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
     this.getDataFromCNode()
   }
 }

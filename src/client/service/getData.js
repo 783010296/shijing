@@ -55,8 +55,10 @@ export const postFindOne = (code) => fetch('/api/post/findOne',{
 export const postFindAll = (code) => fetch('/api/post/findAll')
 
 /**
- *
+ *爬取cnode数据
  */
+export const fetchNews = () => fetch('/fetchNews')
+
 
 /**
  *
