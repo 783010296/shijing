@@ -1,7 +1,7 @@
 <template>
 	<header id="header">
 	  <div class="mainHeader">
-	    <el-col :span="4" class="logo"><a href="#/">拾景</a></el-col>
+	    <el-col :span="4" class="logo"><a href="/">拾景</a></el-col>
 	    <el-col :span="10">
 	      <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" >
 	        <el-submenu index="1">

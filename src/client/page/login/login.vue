@@ -105,16 +105,13 @@
 	    }
 	  },
 	  mounted(){
-	    document.getElementById("loginBox").style.height = (document.documentElement.clientHeight-60)+'px';
+	    //document.getElementById("loginBox").style.height = (document.documentElement.clientHeight-60)+'px';
 	  }
 	}
 </script>
 <style>
 	#loginBox{
-	  height:100%;
-	  width:100%;
-	  background: url("../../images/background.jpg") no-repeat center;
-	  background-size:100%;
+
 	  overflow:hidden;
 	}
 	.loginBoxMain{

@@ -30,7 +30,9 @@ export const login = (userObj) => fetch('/api/user/login',{
  */
 export const reg = (userObj) => fetch('/api/user/reg',{
 	username:userObj.username,
-	password:userObj.password
+	password:userObj.password,
+  nickName:userObj.nickName,
+  imgUrl:userObj.imgUrl
 },'POST')
 
 /**

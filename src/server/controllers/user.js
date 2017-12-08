@@ -17,6 +17,8 @@ const reg = function(req,res,next){
 		let newUser = {
 			username:req.body.username,
 			password:req.body.password,
+			nickName:req.body.nickName,
+			imgUrl:req.body.imgUrl,
 			regTime:date,
 			lastLogin:date
 		}
@@ -48,6 +50,8 @@ const login = function(req,res,next){
 		req.session.userInfo = {
 			username:user.username,
 			regTime:user.regTime,
+			nickName:user.nickName,
+			imgUrl:user.imgUrl,
 			lastLogin:user.lastLogin
 		}
 		userProxy.updateUserLastLogin(req.body.username,(err,newuser)=>{

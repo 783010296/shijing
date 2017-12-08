@@ -9,6 +9,8 @@ const createUser = function(obj,callback){ //还有另外一种保存方式，us
 	var user = new userModel()
 	user.username = obj.username
 	user.password = obj.password
+  user.nickName = obj.nickName
+  user.imgUrl = obj.imgUrl
 	user.regTime = obj.regTime
 	user.lastLogin = obj.lastLogin
 	user.save(callback)
