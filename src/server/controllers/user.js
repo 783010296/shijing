@@ -2,6 +2,7 @@ import * as modelsProxy from '../proxy/'
 
 const userProxy  = modelsProxy.userProxy;
 import crypto from 'crypto'
+import uuid from 'node-uuid'
 
 const secretKey = 'fd*^$#ygwefugb!#TYTf%&lasgdfiu&*%^'; 
 
@@ -19,6 +20,7 @@ const reg = function(req,res,next){
 			password:req.body.password,
 			nickName:req.body.nickName,
 			imgUrl:req.body.imgUrl,
+			uid:uuid.v4(),
 			regTime:date,
 			lastLogin:date
 		}
@@ -52,6 +54,7 @@ const login = function(req,res,next){
 			regTime:user.regTime,
 			nickName:user.nickName,
 			imgUrl:user.imgUrl,
+			uid:user.uid,
 			lastLogin:user.lastLogin
 		}
 		userProxy.updateUserLastLogin(req.body.username,(err,newuser)=>{

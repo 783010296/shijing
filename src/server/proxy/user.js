@@ -12,6 +12,7 @@ const createUser = function(obj,callback){ //还有另外一种保存方式，us
   user.nickName = obj.nickName
   user.imgUrl = obj.imgUrl
 	user.regTime = obj.regTime
+	user.uid = obj.uid
 	user.lastLogin = obj.lastLogin
 	user.save(callback)
 }

@@ -27,20 +27,6 @@
         </el-input>
       </div>
     </div>
-    <el-dialog title="请输入昵称并选择头像" :visible.sync="dialogFormVisible" width="30%" :close-on-click-modal="myFasle" :close-on-press-escape="myFasle" :show-close="myFasle" >
-      <el-form>
-        <div>
-          <el-radio-group v-model="radio" @change="radioChange">
-            <el-radio label="1" border>男生</el-radio>
-            <el-radio label="0" border>女生</el-radio>
-          </el-radio-group>
-          <img :class="[key==myHead?'headActive':'','headImg']"" v-for="(head, key) in heads" :src="head" @click="headChange(key)">
-        </div>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogSure">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -56,28 +42,8 @@
         msg:'',
         allMsgs:[],
         name:'',
-        dialogFormVisible:true,
-        radio:'1',
-        heads:[],
-        myHead:0,
         myheadUrl:"",
-        girlHeads:[
-          'http://scimg.jb51.net/allimg/160706/103-160F6095531355.jpg',
-          'https://img.qq1234.org/uploads/allimg/150403/15052U595-3.jpg',
-          'http://dynamic-image.yesky.com/600x-/uploadImages/upload/20140905/xnqtzgkk5y4png.png',
-          'http://f.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=4b4e573efdfaaf5184b689b9bc64b8d6/1b4c510fd9f9d72ae50cef05d42a2834349bbbba.jpg',
-          'http://cms-bucket.nosdn.127.net/95c6aa17499f4733b0a94ef65ced316320171204135750.jpeg'
-        ],
-        boyHeads:[
-          'http://a3.att.hudong.com/25/88/01300543064509142398886939232_s.jpg',
-          'http://9.pic.9ht.com/thumb/up/2016-7/14692393177295271_600_566.jpg',
-          'http://m.vstou.com/img/201506/2d59d109b3de9c82b5d349c76c81800a18d843c1.jpg',
-          'http://i0.sinaimg.cn/ty/s/2012-01-11/1326214455_X0EHbR.jpg',
-          'http://www.touxiangdaquan.net/uploads/allimg/c150407/142S91CQ5K0-456054.jpg'
-        ],
-        myFasle:false,
         emoji:1,
-        popoverValue:false
       }
     },
     computed:{
@@ -109,34 +75,6 @@
         this.allMsgs.push(msg)
         this.msg = ""
       },
-      radioChange(){
-        if(this.radio == '1'){
-          this.heads = this.boyHeads
-          this.myHead = 0
-        }
-        if(this.radio == '0'){
-          this.heads = this.girlHeads
-          this.myHead = 0
-        }
-        this.myheadUrl = this.heads[this.myHead]
-      },
-      headChange(key){
-        this.myHead = key
-        this.myheadUrl = this.heads[this.myHead]
-      },
-      dialogSure(){
-        if(this.myheadUrl){
-          this.name = this.userInfo.username
-          this.dialogFormVisible = false
-          this.$message({
-            type: 'success',
-            message: '已选择聊天头像'
-          })
-          socket.emit('coming', this.name)
-        }else{
-          this.$message.error('错了哦，昵称不能为空');
-        }
-      },
       sendEmoji(i){
         this.emoji = i;
         this.msg += `[emoji:${i}]`
@@ -156,7 +94,8 @@
       socket.on('getMsg', function(data){
         _this.allMsgs.push(data);
       })
-      this.radioChange()
+      this.name = this.userInfo.nickName
+      this.myheadUrl = this.userInfo.imgUrl
     },
     components:{
       headTop
